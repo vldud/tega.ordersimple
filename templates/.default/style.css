@@ -1,0 +1,57 @@
+.order-simple input[type='text'],
+.order-simple select,
+.order-simple textarea
+{
+    width: 100%;
+    max-width: 320px;
+    min-width: auto;
+}
+
+.order-simple input[type='text'],
+.order-simple textarea
+{
+    padding: 0 5px;
+}
+
+.order-simple label {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.order-simple__block {
+    width: 100%;
+    box-sizing: content-box;
+    margin-bottom: 30px;
+}
+
+.order-simple__block__title {
+    font-weight: bold;
+    font-size: 1.3em;
+    margin-bottom: 15px;
+}
+
+.order-simple__field {
+    margin-bottom: 5px;
+}
+
+.order-simple__field__title {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.order-simple__price-table {
+    margin-top: 30px;
+}
+
+.order-simple__price-table td {
+    vertical-align: top;
+}
+
+.order-simple__price-table td:nth-child(2n) {
+    padding-left: 30px;
+    font-weight: bold;
+}
+
+.order-simple__error {
+    color: red;
+}
