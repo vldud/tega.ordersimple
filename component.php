@@ -181,7 +181,7 @@ if (!empty($arUserResult["BASKET_ITEMS"])) {
             $arResultItem["PREVIEW_PICTURE"] = $arProductData[$productId]["PREVIEW_PICTURE"];
         if ((int)$arProductData[$productId]["DETAIL_PICTURE"] > 0)
             $arResultItem["DETAIL_PICTURE"] = $arProductData[$productId]["DETAIL_PICTURE"];
-        if ($arProductData[$productId]["PREVIEW_TEXT"] != '')
+        if (isset($arProductData[$productId]["PREVIEW_TEXT"]) && $arProductData[$productId]["PREVIEW_TEXT"] != '')
             $arResultItem["PREVIEW_TEXT"] = $arProductData[$productId]["PREVIEW_TEXT"];
 
         if (!empty($arProductData[$arResultItem["PRODUCT_ID"]])) {
@@ -274,7 +274,7 @@ $arResult["PRICES"]["TOTAL_PRICE_FORMATED"] = SaleFormatCurrency($arResult["PRIC
 
 /* get pay systems */
 $arResult["PAY_SYSTEM"] = array();
-$dbPaySystem = CSalePaySystem::GetList(
+$dbPaySystem = (new CSalePaySystem)->GetList(
     $arOrder = Array("SORT" => "ASC"),
     Array(
         "ACTIVE" => "Y",
@@ -292,7 +292,7 @@ while ($paySystem = $dbPaySystem->Fetch()) {
 /* / get pay systems */
 
 /* get order properties */
-$dbOrderProps = CSaleOrderProps::GetList(
+$dbOrderProps = (new CSaleOrderProps)->GetList(
     array("SORT" => "ASC", "ID" => "ASC"),
     array(
         "ID" => $arParams["ORDER_PROPS"],
@@ -436,19 +436,19 @@ if (isset($_POST[$arParams["FORM_NAME"]])) {
             )) {
             $mailContactList = "";
             $mailUserName = "";
-            if ($arParams["PHONE_PROPERTY"] != "" && isset($arUserResult["ORDER_PROP"][$arParams["PHONE_PROPERTY"]])) {
+            if (!empty($arParams["PHONE_PROPERTY"]) && isset($arUserResult["ORDER_PROP"][$arParams["PHONE_PROPERTY"]])) {
                 $mailContactList .= GetMessage("PHONE_PROPERTY") .
                     $arUserResult["ORDER_PROP"][$arParams["PHONE_PROPERTY"]] . '<br/>';
             }
-            if ($arParams["DATE_PROPERTY"] != "" && isset($arUserResult["ORDER_PROP"][$arParams["DATE_PROPERTY"]])) {
+            if (!empty($arParams["DATE_PROPERTY"]) && isset($arUserResult["ORDER_PROP"][$arParams["DATE_PROPERTY"]])) {
                 $mailContactList .= GetMessage("DATE_PROPERTY") .
                     $arUserResult["ORDER_PROP"][$arParams["DATE_PROPERTY"]] . '<br/>';
             }
-            if ($arParams["EMAIL_PROPERTY"] != "" && isset($arUserResult["ORDER_PROP"][$arParams["EMAIL_PROPERTY"]])) {
+            if (!empty($arParams["EMAIL_PROPERTY"]) && isset($arUserResult["ORDER_PROP"][$arParams["EMAIL_PROPERTY"]])) {
                 $mailContactList .= GetMessage("EMAIL_PROPERTY") .
                     $arUserResult["ORDER_PROP"][$arParams["EMAIL_PROPERTY"]] . '<br/>';
             }
-            if ($arParams["FIO_PROPERTY"] != "" && isset($arUserResult["ORDER_PROP"][$arParams["FIO_PROPERTY"]])) {
+            if (!empty($arParams["FIO_PROPERTY"]) && isset($arUserResult["ORDER_PROP"][$arParams["FIO_PROPERTY"]])) {
                 $mailUserName = $arUserResult["ORDER_PROP"][$arParams["FIO_PROPERTY"]];
             }
             $arEventFieldsUs = array(
