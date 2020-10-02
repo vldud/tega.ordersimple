@@ -118,19 +118,19 @@ if ($arResult["ORDER_SUCCESSFULLY_CREATED"] == "Y") {
             <td>
                 <? echo GetMessage("ORDER_PRICE"); ?>
             </td>
-            <td><? echo $arResult["PRICES"]["PRODUCTS_PRICE_FORMATED"]; ?></td>
+            <td><? echo $arResult["PRICES"]["PRODUCTS_PRICE_FORMATTED"]; ?></td>
         </tr>
         <tr>
             <td>
                 <? echo GetMessage("DELIVERY_PRICE"); ?>
             </td>
-            <td><? echo $arResult["PRICES"]["DELIVERY_PRICE_FORMATED"]; ?></td>
+            <td><? echo $arResult["PRICES"]["DELIVERY_PRICE_FORMATTED"]; ?></td>
         </tr>
         <tr>
             <td>
                 <? echo GetMessage("TOTAL_PRICE"); ?>
             </td>
-            <td><? echo $arResult["PRICES"]["TOTAL_PRICE_FORMATED"]; ?></td>
+            <td><? echo $arResult["PRICES"]["TOTAL_PRICE_FORMATTED"]; ?></td>
         </tr>
     </table>
 

@@ -18,19 +18,19 @@ while ($site = $obSite->Fetch()) {
 $arComponentParameters = array(
     "GROUPS" => array(
         "DELIVERY_TIME" => array(
-            "NAME" => GetMessage("DELIVERY_TIME_GROUP"),
+            "NAME" => \Bitrix\Main\Localization\Loc::getMessage("DELIVERY_TIME_GROUP"),
             "SORT" => 120
         ),
         "WEEKEND" => array(
-            "NAME" => GetMessage("WEEKEND_PARAMETER_GROUP"),
+            "NAME" => \Bitrix\Main\Localization\Loc::getMessage("WEEKEND_PARAMETER_GROUP"),
             "SORT" => 130
         ),
         "PROPERTIES" => array(
-            "NAME" => GetMessage("PROPERTIES_GROUP"),
+            "NAME" => \Bitrix\Main\Localization\Loc::getMessage("PROPERTIES_GROUP"),
             "SORT" => 110
         ),
         "HTML_ATTRIBUTES" => array(
-            "NAME" => GetMessage("HTML_ATTRIBUTES_GROUP"),
+            "NAME" => \Bitrix\Main\Localization\Loc::getMessage("HTML_ATTRIBUTES_GROUP"),
             "SORT" => 140
         ),
     ),
@@ -43,26 +43,26 @@ $arComponentParameters = array(
             "VALUES" => $arSite,
             "DEFAULT" => $siteDefault,
             "ADDITIONAL_VALUES" => "N",
-            "NAME" => GetMessage("SITE_ID"),
+            "NAME" => \Bitrix\Main\Localization\Loc::getMessage("SITE_ID"),
             "PARENT" => "BASE",
             "REFRESH" => "Y"
         ),
         "ORDER_RESULT_PAGE" => array(
-            'NAME' => GetMessage("ORDER_RESULT_PAGE"),
+            'NAME' => \Bitrix\Main\Localization\Loc::getMessage("ORDER_RESULT_PAGE"),
             'TYPE' => 'STRING',
             'MULTIPLE' => 'N',
             "DEFAULT" => "",
             'PARENT' => 'BASE'
         ),
         "BASKET_PAGE" => array(
-            'NAME' => GetMessage("BASKET_PAGE"),
+            'NAME' => \Bitrix\Main\Localization\Loc::getMessage("BASKET_PAGE"),
             'TYPE' => 'STRING',
             'MULTIPLE' => 'N',
             "DEFAULT" => "/personal/cart/",
             'PARENT' => 'BASE'
         ),
         "ANONYMOUS_USER_ID" => array(
-            'NAME' => GetMessage("ANONYMOUS_USER_ID"),
+            'NAME' => \Bitrix\Main\Localization\Loc::getMessage("ANONYMOUS_USER_ID"),
             'TYPE' => 'STRING',
             'MULTIPLE' => 'N',
             "DEFAULT" => "",
@@ -73,33 +73,33 @@ $arComponentParameters = array(
             "MULTIPLE" => "Y",
             "VALUES" => $arEventType,
             "ADDITIONAL_VALUES" => "N",
-            "NAME" => GetMessage("EVENT_TYPES"),
+            "NAME" => \Bitrix\Main\Localization\Loc::getMessage("EVENT_TYPES"),
             "PARENT" => "BASE",
             "REFRESH" => "N"
         ),
         "FORM_NAME" => array(
-            'NAME' => GetMessage("FORM_NAME"),
+            'NAME' => \Bitrix\Main\Localization\Loc::getMessage("FORM_NAME"),
             'TYPE' => 'STRING',
             'MULTIPLE' => 'N',
             "DEFAULT" => "simple_order_form",
             'PARENT' => 'HTML_ATTRIBUTES'
         ),
         "FORM_ID" => array(
-            'NAME' => GetMessage("FORM_ID"),
+            'NAME' => \Bitrix\Main\Localization\Loc::getMessage("FORM_ID"),
             'TYPE' => 'STRING',
             'MULTIPLE' => 'N',
             "DEFAULT" => "simple_order_form",
             'PARENT' => 'HTML_ATTRIBUTES'
         ),
         "ENABLE_VALIDATION_INPUT_NAME" => array(
-            'NAME' => GetMessage("ENABLE_VALIDATION_INPUT_NAME"),
+            'NAME' => \Bitrix\Main\Localization\Loc::getMessage("ENABLE_VALIDATION_INPUT_NAME"),
             'TYPE' => 'STRING',
             'MULTIPLE' => 'N',
             "DEFAULT" => "validation",
             'PARENT' => 'HTML_ATTRIBUTES'
         ),
         "ENABLE_VALIDATION_INPUT_ID" => array(
-            'NAME' => GetMessage("ENABLE_VALIDATION_INPUT_ID"),
+            'NAME' => \Bitrix\Main\Localization\Loc::getMessage("ENABLE_VALIDATION_INPUT_ID"),
             'TYPE' => 'STRING',
             'MULTIPLE' => 'N',
             "DEFAULT" => "simple_order_form_validation",
@@ -108,7 +108,7 @@ $arComponentParameters = array(
     ),
 );
 
-if (CModule::IncludeModule("sale")) {
+if (\Bitrix\Main\Loader::includeModule("sale")) {
     $dbPersonType = CSalePersonType::GetList(
         array("SORT" => "ASC"),
         array("LID" => (empty($arCurrentValues["SITE_ID"])) ? $siteDefault : $arCurrentValues["SITE_ID"], "ACTIVE" => "Y")
@@ -120,9 +120,9 @@ if (CModule::IncludeModule("sale")) {
     $arComponentParameters["PARAMETERS"]["PERSON_TYPE_ID"] = array(
         "TYPE" => "LIST",
         "MULTIPLE" => "N",
-        "VALUES" => array(0 => GetMessage("NOT_SELECTED")) + $arPersonType,
+        "VALUES" => array(0 => \Bitrix\Main\Localization\Loc::getMessage("NOT_SELECTED")) + $arPersonType,
         "ADDITIONAL_VALUES" => "N",
-        "NAME" => GetMessage("PERSON_TYPE_ID"),
+        "NAME" => \Bitrix\Main\Localization\Loc::getMessage("PERSON_TYPE_ID"),
         "PARENT" => "PROPERTIES",
         "REFRESH" => "Y"
     );
@@ -145,7 +145,7 @@ if (CModule::IncludeModule("sale")) {
         "MULTIPLE" => "Y",
         "VALUES" => $arProfileProps,
         "ADDITIONAL_VALUES" => "N",
-        "NAME" => GetMessage("ORDER_PROPS"),
+        "NAME" => \Bitrix\Main\Localization\Loc::getMessage("ORDER_PROPS"),
         "PARENT" => "PROPERTIES",
         "REFRESH" => "Y"
     );
@@ -160,34 +160,34 @@ if (CModule::IncludeModule("sale")) {
         "VALUES" => $arVisibleProps,
         "DEFAULT" => "",
         "ADDITIONAL_VALUES" => "N",
-        "NAME" => GetMessage("REQUIRED_ORDER_PROPS"),
+        "NAME" => \Bitrix\Main\Localization\Loc::getMessage("REQUIRED_ORDER_PROPS"),
         "PARENT" => "PROPERTIES",
         "REFRESH" => "N"
     );
     $arComponentParameters["PARAMETERS"]["EMAIL_PROPERTY"] = array(
         "TYPE" => "LIST",
         "MULTIPLE" => "N",
-        "VALUES" => array(0 => GetMessage("NOT_SELECTED")) + $arVisibleProps,
+        "VALUES" => array(0 => \Bitrix\Main\Localization\Loc::getMessage("NOT_SELECTED")) + $arVisibleProps,
         "ADDITIONAL_VALUES" => "N",
-        "NAME" => GetMessage("EMAIL_PROPERTY"),
+        "NAME" => \Bitrix\Main\Localization\Loc::getMessage("EMAIL_PROPERTY"),
         "PARENT" => "PROPERTIES",
         "REFRESH" => "N"
     );
     $arComponentParameters["PARAMETERS"]["PHONE_PROPERTY"] = array(
         "TYPE" => "LIST",
         "MULTIPLE" => "N",
-        "VALUES" => array(0 => GetMessage("NOT_SELECTED")) + $arVisibleProps,
+        "VALUES" => array(0 => \Bitrix\Main\Localization\Loc::getMessage("NOT_SELECTED")) + $arVisibleProps,
         "ADDITIONAL_VALUES" => "N",
-        "NAME" => GetMessage("PHONE_PROPERTY"),
+        "NAME" => \Bitrix\Main\Localization\Loc::getMessage("PHONE_PROPERTY"),
         "PARENT" => "PROPERTIES",
         "REFRESH" => "N"
     );
     $arComponentParameters["PARAMETERS"]["FIO_PROPERTY"] = array(
         "TYPE" => "LIST",
         "MULTIPLE" => "N",
-        "VALUES" => array(0 => GetMessage("NOT_SELECTED")) + $arVisibleProps,
+        "VALUES" => array(0 => \Bitrix\Main\Localization\Loc::getMessage("NOT_SELECTED")) + $arVisibleProps,
         "ADDITIONAL_VALUES" => "N",
-        "NAME" => GetMessage("FIO_PROPERTY"),
+        "NAME" => \Bitrix\Main\Localization\Loc::getMessage("FIO_PROPERTY"),
         "PARENT" => "PROPERTIES",
         "REFRESH" => "N"
     );
@@ -195,7 +195,7 @@ if (CModule::IncludeModule("sale")) {
         "TYPE" => "CHECKBOX",
         "MULTIPLE" => "N",
         "DEFAULT" => "Y",
-        "NAME" => GetMessage("SET_DEFAULT_PROPERTIES_VALUES"),
+        "NAME" => \Bitrix\Main\Localization\Loc::getMessage("SET_DEFAULT_PROPERTIES_VALUES"),
         "PARENT" => "PROPERTIES",
         "REFRESH" => "N"
     );
@@ -203,7 +203,7 @@ if (CModule::IncludeModule("sale")) {
         "TYPE" => "CHECKBOX",
         "MULTIPLE" => "N",
         "DEFAULT" => "N",
-        "NAME" => GetMessage("USE_DATE_CALCULATION"),
+        "NAME" => \Bitrix\Main\Localization\Loc::getMessage("USE_DATE_CALCULATION"),
         "PARENT" => "PROPERTIES",
         "REFRESH" => "Y"
     );
@@ -211,19 +211,19 @@ if (CModule::IncludeModule("sale")) {
         $arComponentParameters["PARAMETERS"]["DATE_PROPERTY"] = array(
             "TYPE" => "LIST",
             "MULTIPLE" => "N",
-            "VALUES" => array(0 => GetMessage("NOT_SELECTED")) + $arVisibleProps,
+            "VALUES" => array(0 => \Bitrix\Main\Localization\Loc::getMessage("NOT_SELECTED")) + $arVisibleProps,
             "ADDITIONAL_VALUES" => "N",
-            "NAME" => GetMessage("DATE_PROPERTY"),
+            "NAME" => \Bitrix\Main\Localization\Loc::getMessage("DATE_PROPERTY"),
             "PARENT" => "PROPERTIES",
             "REFRESH" => "N"
         );
         $arComponentParameters["PARAMETERS"]["DATE_FORMAT"] = CIBlockParameters::GetDateFormat(
-            GetMessage("DATE_FORMAT"),
+            \Bitrix\Main\Localization\Loc::getMessage("DATE_FORMAT"),
             "DELIVERY_TIME"
         );
         $arComponentParameters["PARAMETERS"]["DATES_INTERVAL"] = array(
             "PARENT" => "DELIVERY_TIME",
-            "NAME" => GetMessage("DATES_INTERVAL"),
+            "NAME" => \Bitrix\Main\Localization\Loc::getMessage("DATES_INTERVAL"),
             "TYPE" => "STRING",
             "MULTIPLE" => "N",
             "DEFAULT" => "14",
@@ -232,7 +232,7 @@ if (CModule::IncludeModule("sale")) {
         );
         $arComponentParameters["PARAMETERS"]["CLOSING_TIME"] = array(
             "PARENT" => "DELIVERY_TIME",
-            "NAME" => GetMessage("CLOSING_TIME"),
+            "NAME" => \Bitrix\Main\Localization\Loc::getMessage("CLOSING_TIME"),
             "TYPE" => "STRING",
             "MULTIPLE" => "N",
             "DEFAULT" => "18:00",
@@ -241,7 +241,7 @@ if (CModule::IncludeModule("sale")) {
         );
         $arComponentParameters["PARAMETERS"]["PROHIBITED_DATES"] = array(
             "PARENT" => "DELIVERY_TIME",
-            "NAME" => GetMessage("PROHIBITED_DATES"),
+            "NAME" => \Bitrix\Main\Localization\Loc::getMessage("PROHIBITED_DATES"),
             "TYPE" => "STRING",
             "MULTIPLE" => "Y",
             "DEFAULT" => array("01.01.1970"),
@@ -250,37 +250,37 @@ if (CModule::IncludeModule("sale")) {
         );
         $arComponentParameters["PARAMETERS"]["WEEKEND_DAY_1"] = Array(
             "PARENT" => "WEEKEND",
-            "NAME" => GetMessage("WEEKEND_DAY_MONDAY"),
+            "NAME" => \Bitrix\Main\Localization\Loc::getMessage("WEEKEND_DAY_MONDAY"),
             "TYPE" => "CHECKBOX",
         );
         $arComponentParameters["PARAMETERS"]["WEEKEND_DAY_2"] = Array(
             "PARENT" => "WEEKEND",
-            "NAME" => GetMessage("WEEKEND_DAY_TUESDAY"),
+            "NAME" => \Bitrix\Main\Localization\Loc::getMessage("WEEKEND_DAY_TUESDAY"),
             "TYPE" => "CHECKBOX",
         );
         $arComponentParameters["PARAMETERS"]["WEEKEND_DAY_3"] = Array(
             "PARENT" => "WEEKEND",
-            "NAME" => GetMessage("WEEKEND_DAY_WEDNESDAY"),
+            "NAME" => \Bitrix\Main\Localization\Loc::getMessage("WEEKEND_DAY_WEDNESDAY"),
             "TYPE" => "CHECKBOX",
         );
         $arComponentParameters["PARAMETERS"]["WEEKEND_DAY_4"] = Array(
             "PARENT" => "WEEKEND",
-            "NAME" => GetMessage("WEEKEND_DAY_THURSDAY"),
+            "NAME" => \Bitrix\Main\Localization\Loc::getMessage("WEEKEND_DAY_THURSDAY"),
             "TYPE" => "CHECKBOX",
         );
         $arComponentParameters["PARAMETERS"]["WEEKEND_DAY_5"] = Array(
             "PARENT" => "WEEKEND",
-            "NAME" => GetMessage("WEEKEND_DAY_FRIDAY"),
+            "NAME" => \Bitrix\Main\Localization\Loc::getMessage("WEEKEND_DAY_FRIDAY"),
             "TYPE" => "CHECKBOX",
         );
         $arComponentParameters["PARAMETERS"]["WEEKEND_DAY_6"] = Array(
             "PARENT" => "WEEKEND",
-            "NAME" => GetMessage("WEEKEND_DAY_SATURDAY"),
+            "NAME" => \Bitrix\Main\Localization\Loc::getMessage("WEEKEND_DAY_SATURDAY"),
             "TYPE" => "CHECKBOX",
         );
         $arComponentParameters["PARAMETERS"]["WEEKEND_DAY_0"] = Array(
             "PARENT" => "WEEKEND",
-            "NAME" => GetMessage("WEEKEND_DAY_SUNDAY"),
+            "NAME" => \Bitrix\Main\Localization\Loc::getMessage("WEEKEND_DAY_SUNDAY"),
             "TYPE" => "CHECKBOX",
         );
     }
